@@ -92,7 +92,7 @@ public class DateTimeEntryTest
      * Test parsing entry without date-time section.
      */
     @Test
-    @DisplayName("Text without DATETIME section.")
+    @DisplayName("Test without DATETIME section.")
     public void testParseEmptyDateTimeSection()
     {
         final String entry = "test string";

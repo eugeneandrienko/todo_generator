@@ -3,6 +3,7 @@ package com.eugene_andrienko;
 import com.eugene_andrienko.todo_entries.AbstractEntry;
 import com.eugene_andrienko.todo_entries.DateTimeEntry;
 import com.eugene_andrienko.todo_entries.NoteEntry;
+import com.eugene_andrienko.todo_entries.PeriodEntry;
 import com.eugene_andrienko.todo_entries.TodoEntry;
 
 import java.text.ParseException;
@@ -16,7 +17,7 @@ public class Parser
 {
     private enum EntryType
     {
-        TODO, DATETIME, NOTE
+        TODO, DATETIME, PERIOD, NOTE
     }
 
     public LinkedList<AbstractEntry> parse(Stream<String> entries)
@@ -54,6 +55,8 @@ public class Parser
                 return new TodoEntry(rawEntry);
             case DATETIME:
                 return new DateTimeEntry(rawEntry);
+            case PERIOD:
+                return new PeriodEntry(rawEntry);
             case NOTE:
                 return new NoteEntry(rawEntry);
             default:
@@ -70,14 +73,21 @@ public class Parser
      */
     private EntryType getEntryType(String rawEntry) throws ParseException
     {
-        Character firstCharacter = rawEntry.charAt(0);
+        char firstCharacter = rawEntry.charAt(0);
 
         switch(firstCharacter)
         {
             case '-':
                 return EntryType.TODO;
             case '[':
-                return EntryType.DATETIME;
+                if(rawEntry.contains("-"))
+                {
+                    return EntryType.PERIOD;
+                }
+                else
+                {
+                    return EntryType.DATETIME;
+                }
             case '~':
                 return EntryType.NOTE;
             default:

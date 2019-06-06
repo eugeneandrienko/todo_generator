@@ -3,6 +3,7 @@ package com.eugene_andrienko;
 import com.eugene_andrienko.todo_entries.AbstractEntry;
 import com.eugene_andrienko.todo_entries.DateTimeEntry;
 import com.eugene_andrienko.todo_entries.NoteEntry;
+import com.eugene_andrienko.todo_entries.PeriodEntry;
 import com.eugene_andrienko.todo_entries.TodoEntry;
 
 import java.util.LinkedList;
@@ -58,6 +59,10 @@ public class Compiler
         {
             return generateDateTimeTexString((DateTimeEntry) entry);
         }
+        else if(entry instanceof PeriodEntry)
+        {
+            return generatePeriodTexString((PeriodEntry) entry);
+        }
         else if(entry instanceof NoteEntry)
         {
             return generateNoteTexString((NoteEntry) entry);
@@ -89,6 +94,20 @@ public class Compiler
     {
         return String.format("\\item[\\textbigcircle] [%s] %s",
                 entry.getDateTime().format(entry.getFormatter()),
+                entry.getText());
+    }
+
+    /**
+     * Generate TeX string for PERIOD entry.
+     *
+     * @param entry PERIOD entry.
+     * @return Tex String.
+     */
+    private String generatePeriodTexString(PeriodEntry entry)
+    {
+        return String.format("\\item[\\textbigcircle] [%s--%s] %s",
+                entry.getDateStart().format(entry.getFormatter()),
+                entry.getDateEnd().format(entry.getFormatter()),
                 entry.getText());
     }
 

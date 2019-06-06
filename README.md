@@ -8,11 +8,12 @@ First, you should prepare plain text file(s) with next format:
 * Use `-` symbol for simple TODO entry, for example: `- Buy applejuice`. Result will be like: `☐ Buy applejuice`.
 * Use `[DD.MM.YYYY]` text for entry with date, for example: `[20.12.2018] Pay for domain`. Result will be like: `◯ [20.12.2018] Pay for domain`.
 * Use `[DD.MM.YYYY HH:mm]` for entry with date and time, for example: `[20.12.2018 12:33] Call to the Mom`.  Result will be the next: `◯ [20.12.2018 12:33] Call to the Mom`.
+* Use `[DD.MM.YYYY-DD.MM.YYYY]` for entry with date period. Second date should be bigger than first date. For example: `[20.12.2018-21.12.2018] Holidays`. Result will be like: `◯ [20.12.2018-21.12.2018] Holidays`.
 * Use `~` symbol for simple note entry, for example: `~ http://example.org`. Result will be the next: `— http://example.org`.
 
 After that, call this generator with the next command:
 ```bash
-java -cp todo-generator-1.0-SNAPSHOT.jar com.eugene_andrienko.Main input_file.txt output_file.tex
+java -cp todo-generator-1.1.jar com.eugene_andrienko.Main input_file.txt output_file.tex
 ```
 In the output TEX file will be simple LaTeX commands which generates our nice TODO-list with `latex` or
 `pdflatex`.

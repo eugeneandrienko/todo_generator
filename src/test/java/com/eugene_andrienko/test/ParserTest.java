@@ -30,7 +30,8 @@ public class ParserTest
                 "- Test1",
                 "- Test2",
                 "~ Note",
-                "[25.06.2015] Date test"));
+                "[25.06.2015] Date test",
+                "[25.06.2015-26.06.2015] Period test"));
         assertEquals("Test1", results.get(0).getText());
         assertEquals("Test2", results.get(1).getText());
         assertEquals("Note", results.get(2).getText());

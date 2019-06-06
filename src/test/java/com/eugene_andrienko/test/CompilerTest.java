@@ -4,6 +4,7 @@ import com.eugene_andrienko.Compiler;
 import com.eugene_andrienko.todo_entries.AbstractEntry;
 import com.eugene_andrienko.todo_entries.DateTimeEntry;
 import com.eugene_andrienko.todo_entries.NoteEntry;
+import com.eugene_andrienko.todo_entries.PeriodEntry;
 import com.eugene_andrienko.todo_entries.TodoEntry;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,30 @@ public class CompilerTest
         Optional<String> string = result.findFirst();
         string.ifPresent(entry -> assertEquals(
                 "\\item[\\textbigcircle] [25.05.2016] Test text",
+                entry,
+                "Wrong TeX generated"));
+        if(!string.isPresent())
+        {
+            assertTrue(false, "No resulting string");
+        }
+    }
+
+    /**
+     * Tests PERIOD entry generation.
+     *
+     * @throws ParseException Failed to parse test string.
+     */
+    @Test
+    @DisplayName("Test PERIOD entry generation.")
+    public void testPeriodEntryGeneration() throws ParseException
+    {
+        LinkedList<AbstractEntry> entries = new LinkedList<>();
+        entries.add(new PeriodEntry("[25.05.2016-26.05.2016] Test text"));
+        Compiler compiler = new Compiler();
+        Stream<String> result = compiler.compile(entries);
+        Optional<String> string = result.findFirst();
+        string.ifPresent(entry -> assertEquals(
+                "\\item[\\textbigcircle] [25.05.2016--26.05.2016] Test text",
                 entry,
                 "Wrong TeX generated"));
         if(!string.isPresent())
