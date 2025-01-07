@@ -1,3 +1,5 @@
+Repository moved to https://codeberg.org/evgandr/todo_generator
+
 # todo_generator
 Small program to generate LaTeX files with marked (or dated) lists from pure text files.
 
